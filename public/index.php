@@ -1,10 +1,14 @@
 <?php
-require '../vendor/autoload.php';
-use Acme\RawgService;
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
 
-$service = new RawgService($_ENV['RAWG_API_KEY']);
+require __DIR__ . '/../vendor/autoload.php';
+
+if (file_exists(__DIR__ . '/../.env')) {
+  Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
+}
+use Acme\RawgService;
+
+
+$service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 
 $games_with_params = $service->fetchGamesWithParam("page_size=5");
 
