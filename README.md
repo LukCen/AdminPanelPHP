@@ -13,3 +13,12 @@ After aquiring your API key, create an '.env' file in the root directory, and ad
 
 Without it, data will not be properly downloaded and you likely won't see anything. RAWG will probably also ban you from accessing their API.
 
+I assume you also have Composer installed.
+
+After cloning the repo, enter the project directory and run
+
+```
+composer install
+```
+
+This will download any required packages into a 'vendor' directory.
