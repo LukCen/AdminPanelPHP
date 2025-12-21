@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/main.css">
+  <title>This is home page.</title>
+
+</head>
+
+<body>
+  <nav class="flex flex-col gap-2 p-2">
+    <ul class="flex flex-col gap-1">
+      <h2>Browse by: </h2>
+      <li>
+        <a href="">Games</a>
+      </li>
+      <li>
+        <a href="">Genres</a>
+      </li>
+      <li>
+        <a href="">Developers</a>
+      </li>
+      <li>
+        <a href="">Publishers</a>
+      </li>
+      <li>
+        <a href="">Tags</a>
+      </li>
+    </ul>
+  </nav>
+  <main class="flex flex-col gap-2 p-2">
+    <section class="flex flex-col gap-2 items-center">
+      <h2>Newest games</h2>
+      <div class="flex gap-2 justify-content-between">
+        <div class="card flex flex-col gap-1 items-center">
+          <img src="https://placehold.co/300x300" alt="">
+          <div class="text">Game Title</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
+
+
+<style>
+  body {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    min-height: 100vh;
+  }
+
+  nav {
+    border-right: 1px solid rgba(0, 0, 0, .35)
+  }
+</style>

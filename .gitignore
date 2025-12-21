@@ -1,0 +1,16 @@
+# Composer dependencies
+/vendor/
+
+# Environment file
+.env
+
+# Optional XAMPP / PHP stuff
+*.log
+*.cache
+
+# OS stuff
+.DS_Store
+Thumbs.db
+
+# Personal notes
+NOTES.md
