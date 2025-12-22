@@ -39,26 +39,9 @@ $games_with_params_return = $games_with_params['results'] ?? [];
 </head>
 
 <body>
-  <nav class="flex flex-col gap-2 p-2">
-    <ul class="flex flex-col gap-1">
-      <h2>Browse by: </h2>
-      <li>
-        <a href="">Games</a>
-      </li>
-      <li>
-        <a href="">Genres</a>
-      </li>
-      <li>
-        <a href="">Developers</a>
-      </li>
-      <li>
-        <a href="">Publishers</a>
-      </li>
-      <li>
-        <a href="">Tags</a>
-      </li>
-    </ul>
-  </nav>
+  <!-- navbar component -->
+  <?php include '../src/Navbar.php' ?>
+  <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2">
     <section class="flex flex-col gap-2 items-center">
       <h2>Newest games</h2>
