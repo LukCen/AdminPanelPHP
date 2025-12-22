@@ -14,6 +14,15 @@ $games_with_params = $service->fetchGamesWithParam("page_size=5");
 
 // return the results array OR an empty array
 $games_with_params_return = $games_with_params['results'] ?? [];
+
+
+
+
+
+
+// DELETE LATER
+
+
 ?>
 
 <!DOCTYPE html>
@@ -46,14 +55,20 @@ $games_with_params_return = $games_with_params['results'] ?? [];
     <section class="flex flex-col gap-2 items-center">
       <h2>Newest games</h2>
       <div class="content flex gap-5">
-        <?php foreach ($games_with_params_return as $game): ?>
-          <?php include __DIR__ . '/../src/GameCard.php'; ?>
-        <?php endforeach; ?>
+        <?php
+        if ($_GET["view"] === "games") {
+          foreach ($games_with_params_return as $game):
+            include __DIR__ . '/../src/GameCard.php';
+          endforeach;
+        }
+        if ($_GET["view"] === "developers")
+          echo "DEVELOPERS"
+            ?>
 
-      </div>
-    </section>
-  </main>
+        </div>
+      </section>
+    </main>
 
-</body>
+  </body>
 
-</html>
+  </html>
