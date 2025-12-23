@@ -10,20 +10,22 @@ use Acme\RawgService;
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 
-$games_with_params = $service->fetchGamesWithParam("page_size=5");
+// $games_with_params = $service->fetchGamesWithParam("page_size=5");
 
 // return the results array OR an empty array
 $games_with_params_return = $games_with_params['results'] ?? [];
 
 
+$games_list = $service->fetchData("games", array("page_size" => 5));
+
+$games_list_results = $games_list['results'] ?? [];
+
+$devs_list = $service->fetchData("developers", array("page_size" => 5))
+
+  // DELETE LATER
 
 
-
-
-// DELETE LATER
-
-
-?>
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,23 +54,25 @@ $games_with_params_return = $games_with_params['results'] ?? [];
   <?php include '../src/Navbar.php' ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2">
-    <section class="flex flex-col gap-2 items-center">
-      <h2>Newest games</h2>
+    <section class="flex flex-col gap-4 items-center">
+      <h2><?php echo ucfirst($_GET["view"]) ?></h2>
       <div class="content flex gap-5">
         <?php
         if ($_GET["view"] === "games") {
-          foreach ($games_with_params_return as $game):
+          foreach ($games_list_results as $game):
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
         }
         if ($_GET["view"] === "developers")
-          echo "DEVELOPERS"
-            ?>
+          foreach ($devs_list['results'] as $dev):
+            include __DIR__ . '/../src/DeveloperCard.php';
+          endforeach;
+        ?>
 
-        </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-  </body>
+</body>
 
-  </html>
+</html>
