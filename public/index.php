@@ -22,9 +22,6 @@ $games_list_results = $games_list['results'] ?? [];
 
 $devs_list = $service->fetchData("developers", array("page_size" => 5))
 
-  // DELETE LATER
-
-
   ?>
 
 <!DOCTYPE html>
@@ -51,22 +48,27 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5))
 
 <body>
   <!-- navbar component -->
-  <?php include '../src/Navbar.php' ?>
+  <?php
+  include '../src/Navbar.php';
+  $view = $_GET["view"] ?? "games";
+  ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2">
     <section class="flex flex-col gap-4 items-center">
-      <h2><?php echo ucfirst($_GET["view"]) ?></h2>
+      <h2><?php echo ucfirst($view ?? "Games") ?></h2>
       <div class="content flex gap-5">
         <?php
-        if ($_GET["view"] === "games") {
+
+        if ($view === "games") {
           foreach ($games_list_results as $game):
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
         }
-        if ($_GET["view"] === "developers")
+        if ($view === "developers") {
           foreach ($devs_list['results'] as $dev):
             include __DIR__ . '/../src/DeveloperCard.php';
           endforeach;
+        }
         ?>
 
       </div>
