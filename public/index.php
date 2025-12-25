@@ -53,7 +53,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5))
   $view = $_GET["view"] ?? "games";
   ?>
   <!-- main content - right side of the page -->
-  <main class="flex flex-col gap-2 p-2">
+  <main class="flex flex-col gap-2 p-2 bg-primary">
     <section class="flex flex-col gap-4 items-center">
       <h2><?php echo ucfirst($view ?? "Games") ?></h2>
       <div class="content flex gap-5">

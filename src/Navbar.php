@@ -8,7 +8,7 @@ $views = [
   ?>
 
 
-<nav class="flex flex-col gap-2 p-2">
+<nav class="flex flex-col gap-2 p-2 bg-secondary">
   <ul class="flex flex-col gap-1">
     <h2>Browse by: </h2>
     <?php
