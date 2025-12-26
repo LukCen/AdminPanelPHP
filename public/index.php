@@ -20,9 +20,11 @@ $games_list = $service->fetchData("games", array("page_size" => 5));
 
 $games_list_results = $games_list['results'] ?? [];
 
-$devs_list = $service->fetchData("developers", array("page_size" => 5))
+$devs_list = $service->fetchData("developers", array("page_size" => 5));
 
-  ?>
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +53,8 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5))
   <?php
   include '../src/Navbar.php';
   $view = $_GET["view"] ?? "games";
+  $game_page = $_GET["game_page"] ?? "payday-2";
+
   ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
@@ -70,10 +74,18 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5))
           endforeach;
         }
         ?>
-
       </div>
     </section>
+
+    <?php
+    $game_view = $service->fetchData("games/$game_page");
+    if ($view === "game_page") {
+      include __DIR__ . '/../src/GamePage.php';
+    }
+
+    ?>
   </main>
+
 
 </body>
 
