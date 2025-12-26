@@ -59,7 +59,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
     <section class="flex flex-col gap-4 items-center">
-      <h2><?php echo ucfirst($view ?? "Games") ?></h2>
+      <h2><?php echo ucfirst($view ?? $_GET["game"] ?? "Games") ?></h2>
       <div class="content flex gap-5">
         <?php
 
@@ -78,13 +78,9 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
     </section>
 
     <?php
-    // $game_page = $_GET["game_page"] ?? null;
-    // $game_view = $service->fetchDataGamePage("games", $game_page);
-    // var_dump(CURL_URL);
+
     if ($view === "game_page") {
-
       include __DIR__ . '/../src/GamePage.php';
-
     }
 
     ?>

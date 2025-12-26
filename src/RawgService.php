@@ -54,13 +54,6 @@ class RawgService
   function fetchDataGamePage($endpoint, $gameId)
   {
     $parameter_list = "";
-
-    // concatenate the params array into a string
-    // if (!empty($params)) {
-    //   foreach ($params as $key => $value):
-    //     $parameter_list .= "&$key=$value";
-    //   endforeach;
-    // }
     $init = curl_init();
     curl_setopt_array($init, [
       CURLOPT_URL => $this->base_link . $endpoint . '/' . $gameId . "?key=" . $this->api_key . $parameter_list,
