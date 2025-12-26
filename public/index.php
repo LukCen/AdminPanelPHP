@@ -53,7 +53,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
   <?php
   include '../src/Navbar.php';
   $view = $_GET["view"] ?? "games";
-  $game_page = $_GET["game_page"] ?? "payday-2";
+
 
   ?>
   <!-- main content - right side of the page -->
@@ -78,9 +78,13 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
     </section>
 
     <?php
-    $game_view = $service->fetchData("games/$game_page");
+    // $game_page = $_GET["game_page"] ?? null;
+    // $game_view = $service->fetchDataGamePage("games", $game_page);
+    // var_dump(CURL_URL);
     if ($view === "game_page") {
+
       include __DIR__ . '/../src/GamePage.php';
+
     }
 
     ?>

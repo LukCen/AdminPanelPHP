@@ -3,7 +3,7 @@
 
 ?>
 
-<a href='?view=game_page&<?= $game['slug'] ?>' class="card flex flex-col gap-2 items-center p-2 bg-secondary">
+<a href='?view=game_page&game=<?= $game['slug'] ?>' class="card flex flex-col gap-2 items-center p-2 bg-secondary">
   <img height="200" width="200" src="<?= htmlspecialchars($game['background_image'] ?? 'https://placehold.co/300x300') ?>" alt="">
   <div class="text flex flex-col gap-2">
     <p>Name: <?= htmlspecialchars($game['name']) ?></p>
