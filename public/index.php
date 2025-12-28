@@ -16,7 +16,7 @@ $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 $games_with_params_return = $games_with_params['results'] ?? [];
 
 
-$games_list = $service->fetchData("games", array("page_size" => 5));
+$games_list = $service->fetchData("games", array("page_size" => 20));
 
 $games_list_results = $games_list['results'] ?? [];
 
@@ -52,15 +52,28 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
   <!-- navbar component -->
   <?php
   include '../src/Navbar.php';
-  $view = $_GET["view"] ?? "games";
-
+  $view = $_GET["view"];
 
   ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
-    <section class="flex flex-col gap-4 items-center">
-      <h2><?php echo ucfirst($view ?? $_GET["game"] ?? "Games") ?></h2>
-      <div class="content flex gap-5">
+    <section class="container-main flex flex-col gap-4 items-center">
+      <h2>
+        <?php
+        switch ($view) {
+          case "games":
+
+            echo ucfirst($view ?? $_GET["game"] ?? "Games");
+            break;
+          case "game_page":
+            echo str_replace('-', ' ', ucwords($_GET["game"]));
+            break;
+        }
+        ?>
+
+      </h2>
+
+      <div class="content flex gap-5 justify-center">
         <?php
 
         if ($view === "games") {

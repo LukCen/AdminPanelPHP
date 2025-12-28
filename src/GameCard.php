@@ -11,3 +11,10 @@
     <button class="bg-light px-2 py-1 w-fit font-bold">Go to game page &rarr; </button>
   </div>
 </a>
+
+<style>
+  .card {
+    max-width: 20%;
+    flex: 1 1 20%;
+  }
+</style>
