@@ -15,7 +15,30 @@ $game_results = $game_view;
     <div class="base-info flex flex-col gap-4">
       <!-- basic info  -->
       <div class="title-and-score flex justify-between items-center gap-5">
-        <span class="game-metacritic flex items-center justify-center"><?= htmlspecialchars($game_results['metacritic']) ?></span>
+        <?php
+        //  coloring the grade element
+        $game_color;
+        $metacritic = $game_results['metacritic'];
+        switch ($metacritic) {
+          case ($metacritic > 90):
+            $game_color = "metacritic-great";
+            break;
+          case ($metacritic > 70):
+            $game_color = "metacritic-good";
+            break;
+          case ($metacritic > 50):
+            $game_color = "metacritic-average";
+            break;
+          case ($metacritic > 30):
+            $game_color = "metacritic-bad";
+            break;
+          case ($metacritic < 30):
+            $game_color = "metacritic-very-bad";
+            break;
+        }
+
+        ?>
+        <span class="game-metacritic flex items-center justify-center <?= $game_color ?>"><?= htmlspecialchars($game_results['metacritic']) ?></span>
         <h1 class="text-center"><?= htmlspecialchars($game_results['name']) ?></h1>
       </div>
       <!-- developer info -->
@@ -31,6 +54,8 @@ $game_results = $game_view;
       <section class="img-and-text flex gap-2">
         <img class="w-1/2" src=<?= htmlspecialchars($game_results["background_image"]) ?> alt="">
         <p class="flex w-1/2">
+
+
           <?= htmlspecialchars($game_results["description_raw"]) ?>
 
         </p>
@@ -66,6 +91,32 @@ $game_results = $game_view;
     min-height: 50px;
     border-radius: 50%;
     padding: 10px;
-    border: 3px solid var(--color-light);
+  }
+
+  .metacritic-great {
+    background: #00ff00;
+    color: #000;
+  }
+
+  .metacritic-good {
+    background: #9cfd00;
+    color: #000;
+  }
+
+  .metacritic-average {
+    background: #fbff04;
+    color: #000;
+  }
+
+  .metacritic-bad {
+    background: #ff9900;
+  }
+
+  .metacritic-very-bad {
+    background: #ff3300;
+  }
+
+  .metacritic-critical {
+    background: #000;
   }
 </style>
