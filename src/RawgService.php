@@ -30,7 +30,6 @@ class RawgService
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_TIMEOUT => 10,
       CURLOPT_HTTPHEADER => ["Accept: application/json"]
-
     ]);
 
     $response = curl_exec($init);

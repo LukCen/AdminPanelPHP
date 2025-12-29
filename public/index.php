@@ -16,7 +16,7 @@ $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 $games_with_params_return = $games_with_params['results'] ?? [];
 
 
-$games_list = $service->fetchData("games", array("page_size" => 20));
+$games_list = $service->fetchData("games", array("page_size" => 20, "page" => 1));
 
 $games_list_results = $games_list['results'] ?? [];
 
@@ -52,7 +52,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
   <!-- navbar component -->
   <?php
   include '../src/Navbar.php';
-  $view = $_GET["view"];
+  $view = $_GET["view"] ?? "games";
 
   ?>
   <!-- main content - right side of the page -->
@@ -62,7 +62,6 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
         <?php
         switch ($view) {
           case "games":
-
             echo ucfirst($view ?? $_GET["game"] ?? "Games");
             break;
           case "game_page":
@@ -88,6 +87,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
         }
         ?>
       </div>
+      <button class="load-more bg-secondary px-4 py-2">Show more games</button>
     </section>
 
     <?php
@@ -99,7 +99,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
     ?>
   </main>
 
-
+  <script src="./js/load-more.js"></script>
 </body>
 
 </html>

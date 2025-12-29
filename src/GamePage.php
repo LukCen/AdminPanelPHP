@@ -6,10 +6,7 @@ $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 $game_view = $service->fetchDataGamePage("games", $_GET['game']);
 
 $game_results = $game_view;
-
 ?>
-
-
 <main>
   <section class="base-info flex flex-col gap-2 items-center">
     <div class="base-info flex flex-col gap-4">

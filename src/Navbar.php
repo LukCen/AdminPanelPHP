@@ -1,7 +1,7 @@
 <?php
 
 $views = [
-  'games' => ['label' => 'Games', 'page_size' => 5],
+  'games' => ['label' => 'Games', 'page_size' => 20],
   'developers' => ['label' => 'Developers', 'page_size' => 5]
 ]
 
