@@ -1,4 +1,8 @@
 /* global overrides/reset */
+:root {
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+}
 
 :root, body,h1,h2,h3,h4,h5,h6,p,span,small {
   margin: 0;
