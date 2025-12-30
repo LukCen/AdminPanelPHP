@@ -57,6 +57,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
   <?php
   include '../src/Navbar.php';
   $view = $_GET["view"] ?? "games";
+  $search_results = $_GET['search'] ?? null;
 
   ?>
   <!-- main content - right side of the page -->
@@ -80,6 +81,11 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
         <?php
 
         if ($view === "games") {
+          // handles user search queries
+          if ($search_results) {
+            $games_list = $service->fetchData('games', ["search" => $search_results]);
+          }
+          $games_list_results = $games_list['results'];
           foreach ($games_list_results as $game):
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
