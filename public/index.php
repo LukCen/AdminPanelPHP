@@ -72,6 +72,8 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
           case "game_page":
             echo str_replace('-', ' ', ucwords($_GET["game"]));
             break;
+          case "developers":
+            echo ucfirst($view);
         }
         ?>
 
@@ -91,7 +93,11 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
           endforeach;
         }
         if ($view === "developers") {
-          foreach ($devs_list['results'] as $dev):
+          if ($search_results) {
+            $devs_list = $service->fetchData('developers', ["search" => $search_results]);
+          }
+          $devs_list_results = $devs_list['results'];
+          foreach ($devs_list_results as $dev):
             include __DIR__ . '/../src/DeveloperCard.php';
           endforeach;
         }

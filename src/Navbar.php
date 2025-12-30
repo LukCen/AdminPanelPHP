@@ -5,15 +5,16 @@ $views = [
   'developers' => ['label' => 'Developers', 'page_size' => 5]
 ];
 
-?>
-
+$active_view = $_GET['view']
+  ?>
 
 <nav class="flex flex-col gap-2 p-2 bg-secondary">
   <h1>Admin panel</h1>
   <div class="input-group flex flex-col gap-1">
     <form method="GET">
       <label for="searchbar">Search games</label>
-      <input type="hidden" name="view" value="games">
+      <!-- passes currently active view as a parameter to the url - makes sure page reload returns you to correct view post-reload -->
+      <input type="hidden" name="view" value=<?= $active_view ?>>
       <input type="search" name="search" id="searchbar">
       <button type="submit" class="bg-light px-4 py-2">Search</button>
     </form>
