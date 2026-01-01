@@ -20,7 +20,7 @@ $games_list = $service->fetchData("games", array("page_size" => 20, "page" => 1)
 
 $games_list_results = $games_list['results'] ?? [];
 
-$devs_list = $service->fetchData("developers", array("page_size" => 5));
+$devs_list = $service->fetchData("developers", array("page_size" => 20));
 
 
 
@@ -37,7 +37,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 5));
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/main.css">
 
-  <title>This is home page.</title>
+  <title>RAWG Game Lister</title>
 
   <style>
     body {

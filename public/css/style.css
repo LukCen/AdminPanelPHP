@@ -72,6 +72,22 @@ main, .container-main {
   color: var(--color-light);
 }
 
+:root .border-primary {
+  border-color: var(--color-primary);
+}
+
+:root .border-secondary {
+  border-color: var(--color-secondary)
+}
+
+:root .border-accent {
+  border-color: var(--color-accent)
+}
+
+:root .border-light {
+  border-color: var(--color-light)
+}
+
 *.bg-primary:not(*.text-primary):not(*.text-secondary) {
   color: var(--color-light);
 }
@@ -84,11 +100,10 @@ main, .container-main {
   color:var(--color-primary);
 }
 
+
+
 /* sizes */
 
-.w-1\/2{
-  width: 50%;
-}
 
 
 /* custom classes */
