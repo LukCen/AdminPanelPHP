@@ -11,10 +11,20 @@
 
 a, button {
 cursor:pointer;
+text-decoration: none;
 }
 
 a:visited {
   color:inherit !important;
+}
+
+form, input, form > * {
+  outline: none;
+  border: 1px solid transparent;
+}
+
+input:focus, input:focus-visible {
+  border: 1px solid var(--color-light)
 }
 
 ul, li {
@@ -39,78 +49,27 @@ main, .container-main {
   flex-wrap: wrap;
 }
 
-/* color theme */
-
-:root {
-  --color-primary: #100a29;
-  --color-secondary: #2a1e6e;
-  --color-light: #f5f5f5;
-  --color-accent: #3a89ff;
-}
-
-:root .bg-primary {
-  background: var(--color-primary);
-}
-
-:root .text-primary {
-  color: var(--color-primary);
-}
-
-:root .bg-secondary {
-  background: var(--color-secondary);
-}
-
-:root .text-secondary {
-  color: var(--color-secondary);
-}
-
-:root .bg-light {
-  background: var(--color-light);
-}
-
-:root .text-light {
-  color: var(--color-light);
-}
-
-:root .border-primary {
-  border-color: var(--color-primary);
-}
-
-:root .border-secondary {
-  border-color: var(--color-secondary)
-}
-
-:root .border-accent {
-  border-color: var(--color-accent)
-}
-
-:root .border-light {
-  border-color: var(--color-light)
-}
-
-*.bg-primary:not(*.text-primary):not(*.text-secondary) {
-  color: var(--color-light);
-}
-
-*.bg-secondary:not(*.text-primary):not(*.text-secondary){
-  color:var(--color-light);
-}
-
-*.bg-light:not(*.text-light) {
-  color:var(--color-primary);
-}
-
-
-
-/* sizes */
-
-
-
 /* custom classes */
 
 .card {
   box-shadow: 0px 0px 5px var(--color-light);
-  border-radius:10px;
+}
+.search button {
+  scale: 1;
+  transition: all .15s ease-in-out;
+}
+.search button:hover {
+  scale: 1.1;
+  border: 1px solid var(--color-light);
+}
+.nav-menu li {
+  scale: 1;
+  transition: all .15s ease-in-out;
+}
+.nav-menu li:hover {
+  scale: 1.05;
 }
 
-
+.nav-menu li.active {
+  border: 2px solid var(--color-light)
+}
