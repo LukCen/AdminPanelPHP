@@ -57,7 +57,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
   <?php
   include '../src/Navbar.php';
   $view = $_GET["view"] ?? "games";
-  $search_results = urlencode($_GET['search']) ?? null;
+  $search_results = $_GET['search'] ?? null;
 
   ?>
   <!-- main content - right side of the page -->
@@ -87,7 +87,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
           if ($search_results) {
             $games_list = $service->fetchData(
               'games',
-              ["search" => $search_results]
+              ["search" => urlencode($search_results)]
             );
           }
           $games_list_results = $games_list['results'];
