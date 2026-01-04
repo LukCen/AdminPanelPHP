@@ -57,7 +57,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
   <?php
   include '../src/Navbar.php';
   $view = $_GET["view"] ?? "games";
-  $search_results = $_GET['search'] ?? null;
+  $search_results = urlencode($_GET['search']) ?? null;
 
   ?>
   <!-- main content - right side of the page -->
@@ -85,13 +85,20 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
         if ($view === "games") {
           // handles user search queries
           if ($search_results) {
-            $games_list = $service->fetchData('games', ["search" => $search_results]);
+            $games_list = $service->fetchData(
+              'games',
+              ["search" => $search_results]
+            );
           }
           $games_list_results = $games_list['results'];
+
           foreach ($games_list_results as $game):
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
         }
+
+
+
         if ($view === "developers") {
           if ($search_results) {
             $devs_list = $service->fetchData('developers', ["search" => $search_results]);
@@ -111,11 +118,23 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
     if ($view === "game_page") {
       include __DIR__ . '/../src/GamePage.php';
     }
-
     ?>
   </main>
 
   <script src="./js/load-more.js"></script>
+  <script defer type="module">
+
+    import { addToDatabase } from '../public/js/connect-to-database.js'
+
+    document.addEventListener('click', (event) => {
+      const btn = event.target.closest('.dbc')
+      if (!btn) return
+      const btnId = btn.dataset.id
+      console.log(`clicked button for -${btnId}-`)
+      addToDatabase(btnId)
+    })
+
+  </script>
 </body>
 
 </html>
