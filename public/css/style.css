@@ -14,7 +14,7 @@ cursor:pointer;
 text-decoration: none;
 }
 
-a:visited {
+a:not(.card a):visited {
   color:inherit !important;
 }
 

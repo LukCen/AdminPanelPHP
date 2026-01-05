@@ -130,8 +130,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
       const btn = event.target.closest('.dbc')
       if (!btn) return
       const btnId = btn.dataset.id
-      console.log(`clicked button for -${btnId}-`)
-      addToDatabase(btnId)
+      addToDatabase([btnId])
     })
 
   </script>
