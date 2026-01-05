@@ -14,4 +14,5 @@
     <!-- for testing -->
   </div>
   <a data-id="<?= htmlspecialchars($game["id"]) ?>" class="dbc bg-primary px-2 py-2 w-fit font-bold">Add to database</a>
+  <span data-id=<?= $game['id'] ?> class="database-add-marker bg-light px-4 py-1 text-center font-bold"></span>
 </div>

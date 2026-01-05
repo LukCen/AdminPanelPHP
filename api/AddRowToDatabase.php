@@ -23,8 +23,6 @@ if (!isset($data)) {
 
 function addRowToDatabase(array $data)
 {
-  // REMOVE 
-  // debug_log($data, "Testing");
 
   $db = 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db';
 
