@@ -1,4 +1,4 @@
-let page = 1
+let page = 2
 
 function loadMoreGames(game) {
   const card = document.createElement('a');
@@ -22,7 +22,6 @@ async function getDataFromEndpoint() {
     const res = await fetch(`../api/GetMoreGames.php?page=${page}`)
     const data = await res.json()
 
-    console.log(data)
     data.results.forEach(loadMoreGames);
     page++
   } catch (err) {

@@ -10,10 +10,10 @@ export async function addToDatabase(value) {
       console.log('Adding successful')
       const marker = document.querySelector(`.database-add-marker[data-id="${value}"]`)
       if (marker) {
-        marker.innerText = "Added to database!"
+        marker.classList.toggle('hidden')
         setTimeout(() => {
-          marker.innerText = ""
-        }, 5000)
+          marker.classList.toggle('hidden')
+        }, 3000)
       }
     }
   } catch (err) {
