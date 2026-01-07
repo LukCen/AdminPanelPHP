@@ -10,19 +10,22 @@ use Acme\RawgService;
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 
-// $games_with_params = $service->fetchGamesWithParam("page_size=5");
+// parse data from config
 
+$config_raw = file_get_contents("../config/views.json");
+$config = json_decode($config_raw, true);
+
+$games_per_page = $config["games"]["games_per_page"] ?? 10;
+$devs_per_page = $config["developers"]["devs_per_page"] ?? 10;
 // return the results array OR an empty array
 $games_with_params_return = $games_with_params['results'] ?? [];
 
 
-$games_list = $service->fetchData("games", array("page_size" => 20, "page" => 1));
+$games_list = $service->fetchData("games", array("page_size" => $games_per_page, "page" => 1));
 
 $games_list_results = $games_list['results'] ?? [];
 
-$devs_list = $service->fetchData("developers", array("page_size" => 20));
-
-
+$devs_list = $service->fetchData("developers", array("page_size" => $devs_per_page));
 
 ?>
 
@@ -137,3 +140,9 @@ $devs_list = $service->fetchData("developers", array("page_size" => 20));
 </body>
 
 </html>
+<style>
+  main .content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+</style>

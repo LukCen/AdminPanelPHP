@@ -1,0 +1,8 @@
+{
+  "games": {
+    "games_per_page": 15
+  },
+  "developers": {
+    "devs_per_page": 15
+  }
+}
