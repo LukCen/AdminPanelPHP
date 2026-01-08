@@ -30,13 +30,13 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
 
 // view - favourites
 
-// $db = new PDO(
-//   'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db',
-//   options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-// );
+$db = new PDO(
+  'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db',
+  options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
 
-// $statement = $db->query("SELECT * FROM games");
-// $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
+$statement = $db->query("SELECT * FROM games");
+$favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -129,11 +129,11 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
           include __DIR__ . '/../src/GamePage.php';
         }
 
-        // if ($view === "favourites") {
-        //   foreach ($favourites as $games):
-        //     include __DIR__ . '/../src/GameCard.php';
-        //   endforeach;
-        // }
+        if ($view === "favourites") {
+          foreach ($favourites as $game):
+            include __DIR__ . '/../src/GameCard.php';
+          endforeach;
+        }
         ?>
       </div>
       <button class="load-more bg-secondary px-4 py-2">Show more games</button>
