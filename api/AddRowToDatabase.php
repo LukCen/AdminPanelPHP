@@ -12,8 +12,6 @@ header('Content-Type: application/json');
 
 // Read request body ONCE
 $data = json_decode(file_get_contents('php://input'), true);
-
-
 if (!isset($data)) {
   http_response_code(400);
   echo json_encode(['error' => 'Missing game ID']);
@@ -38,14 +36,16 @@ function addRowToDatabase(array $data)
   $game = $service->fetchData("games/$data[0]");
 
   $stmt = $pdo->prepare(
-    "INSERT INTO games (rawg_id, name, featured)
-     VALUES (:rawg_id, :name, :featured)"
+    "INSERT INTO games (rawg_id, name, background_image, slug, released)
+     VALUES (:rawg_id, :name, :background_image, :slug, :released)"
   );
 
   $stmt->execute([
     ':rawg_id' => $game['id'],
     ':name' => $game['name'],
-    ':featured' => 1
+    ':background_image' => $game['background_image'],
+    ':slug' => $game['slug'],
+    ':released' => $game['released']
   ]);
 
   echo json_encode(['success' => true]);

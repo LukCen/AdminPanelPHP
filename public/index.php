@@ -27,6 +27,18 @@ $games_list_results = $games_list['results'] ?? [];
 
 $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_page));
 
+
+// view - favourites
+
+// $db = new PDO(
+//   'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db',
+//   options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+// );
+
+// $statement = $db->query("SELECT * FROM games");
+// $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +96,7 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
 
       <div class="content flex gap-5 justify-center">
         <?php
-
+        // echo print_r($favourites);
         if ($view === "games") {
           // handles user search queries
           if ($search_results) {
@@ -111,17 +123,22 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
             include __DIR__ . '/../src/DeveloperCard.php';
           endforeach;
         }
+
+
+        if ($view === "game_page") {
+          include __DIR__ . '/../src/GamePage.php';
+        }
+
+        // if ($view === "favourites") {
+        //   foreach ($favourites as $games):
+        //     include __DIR__ . '/../src/GameCard.php';
+        //   endforeach;
+        // }
         ?>
       </div>
       <button class="load-more bg-secondary px-4 py-2">Show more games</button>
     </section>
 
-    <?php
-
-    if ($view === "game_page") {
-      include __DIR__ . '/../src/GamePage.php';
-    }
-    ?>
   </main>
 
   <script src="./js/load-more.js"></script>
@@ -141,7 +158,8 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
 
 </html>
 <style>
-  main .content {
+  /* move to main.css later - targets only views displaying cards as to not break the layout */
+  main .content:has(.card) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }

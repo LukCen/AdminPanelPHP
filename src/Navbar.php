@@ -2,7 +2,8 @@
 
 $views = [
   'games' => ['label' => 'Games', 'page_size' => 20],
-  'developers' => ['label' => 'Developers', 'page_size' => 10]
+  'developers' => ['label' => 'Developers', 'page_size' => 10],
+  'favourites' => ['label' => 'Favourites', 'page_size' => 10]
 ];
 
 

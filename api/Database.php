@@ -13,7 +13,6 @@ function connectToDatabase()
   }
 
   echo json_encode($results);
-  ;
 
 }
 
