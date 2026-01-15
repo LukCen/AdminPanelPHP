@@ -136,7 +136,14 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         ?>
       </div>
-      <button class="load-more bg-secondary px-4 py-2">Show more games</button>
+      <!-- only show the 'show more games' button when we're on the main page (where all games are displayed) -->
+      <!-- later itll also show for favourites and developers -->
+      <?php
+      if ($view === 'games') {
+        echo "<button class='load-more bg-secondary px-4 py-2'>Show more games</button>";
+      }
+      ?>
+
     </section>
 
   </main>
