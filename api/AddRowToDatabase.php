@@ -22,7 +22,7 @@ if (!isset($data)) {
 function addRowToDatabase(array $data)
 {
 
-  $db = 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db';
+  $db = 'sqlite:' . __DIR__ . '/../database/admin_panel.db';
 
   $pdo = new PDO(
     $db,

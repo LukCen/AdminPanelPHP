@@ -1,7 +1,6 @@
 <?php
-// require __DIR__ . '/../api/Database.php';
-require __DIR__ . '/../vendor/autoload.php';
 
+require __DIR__ . '/../vendor/autoload.php';
 if (file_exists(__DIR__ . '/../.env')) {
   Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
 }
@@ -29,9 +28,9 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
 
 
 // view - favourites
-
+// 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db'
 $db = new PDO(
-  'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db',
+  'sqlite:' . __DIR__ . '/../database/admin_panel.db',
   options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 );
 
@@ -74,10 +73,11 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
   $view = $_GET["view"] ?? "games";
   $search_results = $_GET['search'] ?? null;
 
-  // TEST
+  // CLEAN UP LATER
+  // accessing local database - stores favourited games, returns just their rawg_id (equal to 'id' parameter coming directly from the RAWG API)
   function dbAccess()
   {
-    $db = 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db';
+    $db = 'sqlite:' . __DIR__ . '/../database/admin_panel.db';
 
     $results = [];
     $db_connect = new PDO($db);
@@ -89,11 +89,9 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;
   }
 
-  $favourites_id = dbAccess()
-    // TEST
-  
-
-    ?>
+  $favourites_id = dbAccess();
+  // CLEAN UP LATER
+  ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
     <section class="container-main flex flex-col gap-4 items-center">

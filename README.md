@@ -1,7 +1,11 @@
 
 Hey! This is my very first real PHP project - an admin/control panel, wired to the RAWG API, allowing you to explore and browse games available through that API.
 
-For now it just displays some basic stuff but as I learn the language, more features will appear over time.
+Current features :
+
+- fetches and displays games from the RAWG api
+- fetches and displays developers from the RAWG api
+- allows you to add favourites - currently 
 
 It makes use of RAWG API - <https://rawg.io/apidocs> and you will need an API key to access it. 
 
@@ -22,3 +26,6 @@ composer install
 ```
 
 This will download any required packages into a 'vendor' directory.
+
+You'll also need a PHP server to run it on. I use XAMPP for development - <https://www.apachefriends.org/pl/download.html>
+

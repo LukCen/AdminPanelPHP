@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 function connectToDatabase()
 {
-  $db = 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db';
+  $db = 'sqlite:' . __DIR__ . '/../database/admin_panel.db';
 
   $results = [];
 
