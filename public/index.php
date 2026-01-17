@@ -1,5 +1,5 @@
 <?php
-
+// require __DIR__ . '/../api/Database.php';
 require __DIR__ . '/../vendor/autoload.php';
 
 if (file_exists(__DIR__ . '/../.env')) {
@@ -74,7 +74,26 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
   $view = $_GET["view"] ?? "games";
   $search_results = $_GET['search'] ?? null;
 
-  ?>
+  // TEST
+  function dbAccess()
+  {
+    $db = 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db';
+
+    $results = [];
+    $db_connect = new PDO($db);
+
+    foreach ($db_connect->query("SELECT * FROM games") as $row) {
+      $results[] = $row['rawg_id'];
+    }
+
+    return $results;
+  }
+
+  $favourites_id = dbAccess()
+    // TEST
+  
+
+    ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
     <section class="container-main flex flex-col gap-4 items-center">
@@ -97,6 +116,10 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
       <div class="content flex gap-5 justify-center">
         <?php
         // echo print_r($favourites);
+        
+        $game_ids_unique = array_unique($favourites_id);
+
+
         if ($view === "games") {
           // handles user search queries
           if ($search_results) {
@@ -108,6 +131,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
           $games_list_results = $games_list['results'];
 
           foreach ($games_list_results as $game):
+            $is_in_favourites = in_array($game['id'], $game_ids_unique);
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
         }
