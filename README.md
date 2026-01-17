@@ -5,7 +5,7 @@ Current features :
 
 - fetches and displays games from the RAWG api
 - fetches and displays developers from the RAWG api
-- allows you to add favourites - currently 
+- allows you to add favourites
 
 It makes use of RAWG API - <https://rawg.io/apidocs> and you will need an API key to access it. 
 

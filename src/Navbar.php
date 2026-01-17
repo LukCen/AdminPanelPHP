@@ -25,7 +25,7 @@ $active_view = $_GET['view'] ?? 'games'
     <h2>Browse by: </h2>
     <?php foreach ($views as $view => $param): ?>
       <li class="bg-primary px-4 py-2 rounded <?= $view === $active_view ? 'active' : '' ?>">
-        <a class="block" href="?view=<?= $view ?>&page_size=<?= $param['page_size'] ?>">
+        <a class="block font-bold" href="?view=<?= $view ?>&page_size=<?= $param['page_size'] ?>">
           <?= ucfirst($view) ?>
         </a>
       </li>
