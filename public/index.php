@@ -170,8 +170,12 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
   </main>
+  <?php
+  if ($view === "games") {
+    echo '<script src="./js/load-more.js"></script>';
+  }
+  ?>
 
-  <script src="./js/load-more.js"></script>
   <script defer type="module">
 
     import { addToDatabase } from '../public/js/connect-to-database.js'

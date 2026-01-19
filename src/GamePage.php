@@ -2,11 +2,38 @@
 /** @var array $game_page */
 
 use Acme\RawgService;
+
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 $game_view = $service->fetchDataGamePage("games", $_GET['game']);
 
 $game_results = $game_view;
-?>
+
+$ratings = [
+  "everyone" => [
+    "text" => "everyone",
+    "image" => "../public/assets/icons/esrb-everyone.png"
+  ],
+  "everyone-10-plus" => [
+    "text" => "everyone 10+",
+    "image" => "../public/assets/icons/esrb-everyone-plus-10.png"
+  ],
+  "teen" => [
+    "text" => "teen",
+    "image" => "../public/assets/icons/esrb-teen.png"
+  ],
+  "mature" => [
+    "text" => "mature",
+    "image" => "../public/assets/icons/esrb-mature.png"
+  ],
+  "adults-only" => [
+    "text" => "adults only",
+    "image" => "../public/assets/icons/esrb-adults-only.png"
+  ]
+]
+
+
+
+  ?>
 <main>
   <section class="base-info flex flex-col gap-2 items-center">
     <div class="base-info flex flex-col gap-4">
@@ -36,6 +63,12 @@ $game_results = $game_view;
 
         ?>
         <span class="game-metacritic flex items-center justify-center <?= $game_color ?>"><?= htmlspecialchars($game_results['metacritic']) ?></span>
+        <!-- rating -->
+        <div class="flex gap-2 items-center justify-center">
+          <span>ESRB rating:</span>
+          <img width="50" height="50" class="bg-light" src="<?= $ratings[$game_results['esrb_rating']['slug']]["image"] ?>" />
+          <?= htmlspecialchars($game_results["esrb_rating"]["name"]) ?>
+        </div>
         <h1 class="text-center"><?= htmlspecialchars($game_results['name']) ?></h1>
       </div>
       <!-- developer info -->
