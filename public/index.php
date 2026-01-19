@@ -28,7 +28,6 @@ $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_pa
 
 
 // view - favourites
-// 'sqlite:D:/Programowanie/Projekty/various/sqlite_db/admin_panel.db'
 $db = new PDO(
   'sqlite:' . __DIR__ . '/../database/admin_panel.db',
   options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
@@ -132,6 +131,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
             $is_in_favourites = in_array($game['id'], $game_ids_unique);
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
+          // include __DIR__ . '/../api/GetMoreGames_2.php';
         }
 
 
@@ -167,6 +167,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
       ?>
 
     </section>
+
 
   </main>
 

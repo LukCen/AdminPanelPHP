@@ -17,8 +17,6 @@ if (!isset($data)) {
   echo json_encode(['error' => 'Missing game ID']);
   exit;
 }
-
-
 function addRowToDatabase(array $data)
 {
 
@@ -52,4 +50,3 @@ function addRowToDatabase(array $data)
 }
 
 addRowToDatabase([$data]);
-
