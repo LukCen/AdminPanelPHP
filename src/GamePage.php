@@ -30,9 +30,6 @@ $ratings = [
     "image" => "../public/assets/icons/esrb-adults-only.png"
   ]
 ]
-
-
-
   ?>
 <main>
   <section class="base-info flex flex-col gap-2 items-center">
@@ -71,6 +68,7 @@ $ratings = [
         </div>
         <h1 class="text-center"><?= htmlspecialchars($game_results['name']) ?></h1>
       </div>
+
       <!-- developer info -->
       <div class="developers flex gap-2 justify-center gap-5">
         <span class="flex items-center justify-center text-center">Developers :</span>
@@ -80,16 +78,15 @@ $ratings = [
         endforeach;
         ?>
       </div>
+
       <!-- image + desc -->
       <section class="img-and-text flex gap-2">
         <img class="w-1/2" src=<?= htmlspecialchars($game_results["background_image"]) ?> alt="">
         <p class="flex w-1/2">
-
-
           <?= htmlspecialchars($game_results["description_raw"]) ?>
-
         </p>
       </section>
+
       <!-- platforms -->
       <div class="platforms flex items-center gap-2 justify-between">
         <p>Available on :</p>
@@ -100,6 +97,7 @@ $ratings = [
         endforeach;
         ?>
       </div>
+
       <!-- genres -->
       <div class="platforms flex items-center gap-2 justify-center">
         <p>Genres :</p>

@@ -94,7 +94,6 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
   $favourites_id = dbAccess();
   // CLEAN UP LATER
   
-
   ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
@@ -117,10 +116,6 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
       <div class="content flex gap-5 justify-center">
         <?php
-        // basic pagination - full page reload
-        
-
-
 
         $game_ids_unique = array_unique($favourites_id);
         if ($view === "games") {
@@ -132,6 +127,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
             );
           }
 
+          // check in the session storage for this variable - stores the results array from the api
           if (isset($_SESSION["session_games_list"])) {
             foreach ($_SESSION["session_games_list"] as $game):
               $is_in_favourites = in_array($game['id'], $game_ids_unique);
@@ -139,8 +135,6 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
             endforeach;
           }
         }
-
-
 
         if ($view === "developers") {
           if ($search_results) {
@@ -152,11 +146,11 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
           endforeach;
         }
 
-
+        //game details page
         if ($view === "game_page") {
           include __DIR__ . '/../src/GamePage.php';
         }
-
+        // favourites page - will be empty by default, populates as you add games to favourites  
         if ($view === "favourites") {
           foreach ($favourites as $game):
             include __DIR__ . '/../src/GameCard.php';
@@ -164,30 +158,14 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         ?>
       </div>
-      <!-- only show the 'show more games' button when we're on the main page (where all games are displayed) -->
-      <!-- later itll also show for favourites and developers -->
-      <?php
-      if ($view === 'games') {
-        echo "<button class='load-more bg-secondary px-4 py-2'>Show more games</button>";
-      }
-
-      ?>
       <!-- pagination - currently only works from the 'games' page -->
       <div class="pagination">
-        <a href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">Previous</a>
-        <a href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next</a>
+        <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
+        <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next &rarr;</a>
       </div>
 
     </section>
-
-
   </main>
-  <?php
-  if ($view === "games") {
-    echo '<script src="./js/load-more.js"></script>';
-  }
-  ?>
-
   <script defer type="module">
 
     import { addToDatabase } from '../public/js/connect-to-database.js'
