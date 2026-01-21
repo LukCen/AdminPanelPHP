@@ -58,12 +58,22 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
   <style>
     body {
       display: grid;
-      grid-template-columns: 2fr 10fr;
+      grid-template-columns: 1fr 11fr;
+      grid-template-rows: 11fr auto;
       min-height: 100vh;
     }
 
     nav {
-      border-right: 1px solid rgba(0, 0, 0, .35)
+      border-right: 1px solid rgba(0, 0, 0, .35);
+      grid-row: 1/span 2;
+      grid-column: 1;
+    }
+
+    footer {
+      grid-column: 1 / span 2;
+      grid-row: 2 / span 2;
+      border-top: 1px solid var(--color-light);
+      min-height: 50px;
     }
   </style>
 </head>
@@ -159,15 +169,17 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
       </div>
       <!-- pagination - currently only works from the 'games' page -->
-      <div class="pagination">
+      <div class="pagination my-4">
         <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
         <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next &rarr;</a>
       </div>
 
     </section>
   </main>
+  <footer class="w-full flex gap-2 justify-center items-center bg-secondary">
+    <span>2025-2026 Made by Łukasz Cena :</span><a class="font-medium underline" href="https://lcena.me"> lcena.me</a>
+  </footer>
   <script defer type="module">
-
     import { addToDatabase } from '../public/js/connect-to-database.js'
 
     document.addEventListener('click', (event) => {

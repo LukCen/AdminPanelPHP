@@ -12,6 +12,7 @@
 a, button {
 cursor:pointer;
 text-decoration: none;
+color: inherit;
 }
 
 a:not(.card a):not(.btn):visited {
@@ -69,7 +70,6 @@ main, .container-main {
 }
 .card .btn:hover, button:hover:not(form>button) {
   scale: 1.05;
-
   box-shadow: 0 0 10px var(--color-light)
 }
 
