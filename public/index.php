@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 if (file_exists(__DIR__ . '/../.env')) {
@@ -20,12 +21,14 @@ $devs_per_page = $config["developers"]["devs_per_page"] ?? 10;
 $games_with_params_return = $games_with_params['results'] ?? [];
 
 
-$games_list = $service->fetchData("games", array("page_size" => $games_per_page, "page" => 1));
+$games_current_page = isset($_GET['cpage']) ? (int) $_GET['cpage'] : 1;
+$games_list = $service->fetchData("games", array("page_size" => $games_per_page, "page" => $games_current_page));
 
 $games_list_results = $games_list['results'] ?? [];
-
 $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_page));
-
+$_SESSION["session_games_list"] = $games_list_results;
+$games_page_offset = ($games_current_page - 1) * $games_per_page;
+$games_to_render = array_slice($_SESSION["session_games_list"], $games_page_offset, $games_per_page);
 
 // view - favourites
 $db = new PDO(
@@ -90,6 +93,8 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
   $favourites_id = dbAccess();
   // CLEAN UP LATER
+  
+
   ?>
   <!-- main content - right side of the page -->
   <main class="flex flex-col gap-2 p-2 bg-primary">
@@ -112,11 +117,12 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
       <div class="content flex gap-5 justify-center">
         <?php
-        // echo print_r($favourites);
+        // basic pagination - full page reload
         
+
+
+
         $game_ids_unique = array_unique($favourites_id);
-
-
         if ($view === "games") {
           // handles user search queries
           if ($search_results) {
@@ -125,13 +131,13 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
               ["search" => urlencode($search_results)]
             );
           }
-          $games_list_results = $games_list['results'];
 
-          foreach ($games_list_results as $game):
-            $is_in_favourites = in_array($game['id'], $game_ids_unique);
-            include __DIR__ . '/../src/GameCard.php';
-          endforeach;
-          // include __DIR__ . '/../api/GetMoreGames_2.php';
+          if (isset($_SESSION["session_games_list"])) {
+            foreach ($_SESSION["session_games_list"] as $game):
+              $is_in_favourites = in_array($game['id'], $game_ids_unique);
+              include __DIR__ . '/../src/GameCard.php';
+            endforeach;
+          }
         }
 
 
@@ -164,7 +170,13 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
       if ($view === 'games') {
         echo "<button class='load-more bg-secondary px-4 py-2'>Show more games</button>";
       }
+
       ?>
+      <!-- pagination - currently only works from the 'games' page -->
+      <div class="pagination">
+        <a href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">Previous</a>
+        <a href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next</a>
+      </div>
 
     </section>
 
