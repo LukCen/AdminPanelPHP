@@ -169,8 +169,10 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
       </div>
       <!-- pagination - currently only works from the 'games' page -->
-      <div class="pagination my-4">
-        <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
+      <div class="pagination my-4 
+      <?php if ($view !== "games")
+        echo 'hidden' ?>">
+          <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
         <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next &rarr;</a>
       </div>
 
