@@ -5,9 +5,9 @@ $views = [
   'developers' => ['label' => 'Developers', 'page_size' => 10],
   'favourites' => ['label' => 'Favourites', 'page_size' => 10]
 ];
+$size = $views["games"]["page_size"];
 
-
-$active_view = $_GET['view'] ?? 'games'
+$active_view = $_GET['view'] ?? 'games' . "&page_size=$size"
   ?>
 
 <nav class="flex flex-col gap-2 p-2 bg-secondary">

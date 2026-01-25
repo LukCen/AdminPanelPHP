@@ -135,10 +135,14 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
               'games',
               ["search" => urlencode($search_results)]
             );
+            foreach ($games_list["results"] as $game):
+              $is_in_favourites = in_array($game['id'], $game_ids_unique);
+              include __DIR__ . '/../src/GameCard.php';
+            endforeach;
           }
 
           // check in the session storage for this variable - stores the results array from the api
-          if (isset($_SESSION["session_games_list"])) {
+          else if (isset($_SESSION["session_games_list"])) {
             foreach ($_SESSION["session_games_list"] as $game):
               $is_in_favourites = in_array($game['id'], $game_ids_unique);
               include __DIR__ . '/../src/GameCard.php';
