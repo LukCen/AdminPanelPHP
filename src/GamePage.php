@@ -31,7 +31,7 @@ $ratings = [
   ]
 ]
   ?>
-<main>
+<main class="p-2">
   <section class="base-info flex flex-col gap-2 items-center">
     <div class="base-info flex flex-col gap-4">
       <!-- basic info  -->
@@ -56,15 +56,23 @@ $ratings = [
           case ($metacritic < 30):
             $game_color = "metacritic-very-bad";
             break;
+          case (!isset($metacritic)):
+            $game_color = "#333";
+            break;
         }
 
         ?>
-        <span class="game-metacritic flex items-center justify-center <?= $game_color ?>"><?= htmlspecialchars($game_results['metacritic']) ?></span>
+        <span class="game-metacritic flex items-center justify-center <?= $game_color ?>"><?= $game_results['metacritic'] ? htmlspecialchars($game_results['metacritic']) : "X" ?></span>
         <!-- rating -->
         <div class="flex gap-2 items-center justify-center">
           <span>ESRB rating:</span>
-          <img width="50" height="50" class="bg-light" src="<?= $ratings[$game_results['esrb_rating']['slug']]["image"] ?>" />
-          <?= htmlspecialchars($game_results["esrb_rating"]["name"]) ?>
+          <img width="50" height="50" class="bg-light" src="
+          <?=
+            isset($game_results['esrb_rating']['slug'])
+            ? $ratings[$game_results['esrb_rating']['slug']]["image"]
+            : "https://placehold.co/50x50?text=X";
+          ?>" />
+          <?= htmlspecialchars(isset($game_results["esrb_rating"]["name"])) ? $game_results["esrb_rating"]["name"] : "Unrated" ?>
         </div>
         <h1 class="text-center"><?= htmlspecialchars($game_results['name']) ?></h1>
       </div>
@@ -88,8 +96,8 @@ $ratings = [
       </section>
 
       <!-- platforms -->
-      <div class="platforms flex items-center gap-2 justify-between">
-        <p>Available on :</p>
+      <div class="platforms flex items-center gap-2 justify-start">
+        <p class="font-medium">Available on :</p>
         <?php
         foreach ($game_results["platforms"] as $platform):
           $platform_name = $platform['platform']["name"];
@@ -99,8 +107,8 @@ $ratings = [
       </div>
 
       <!-- genres -->
-      <div class="platforms flex items-center gap-2 justify-center">
-        <p>Genres :</p>
+      <div class="genres flex items-center gap-2 justify-center items-self-start">
+        <p class="font-medium">Genres :</p>
         <?php
         foreach ($game_results["genres"] as $genre):
           $genre_name = $genre["name"];
