@@ -21,7 +21,7 @@ class RawgService
     // concatenate the params array into a string
     if (!empty($params)) {
       foreach ($params as $key => $value):
-        $parameter_list .= "&$key=$value";
+        $parameter_list .= "&" . urlencode($key) . "=" . urlencode($value);
       endforeach;
     }
     $init = curl_init();

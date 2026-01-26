@@ -133,7 +133,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
           if ($search_results) {
             $games_list = $service->fetchData(
               'games',
-              ["search" => urlencode($search_results)]
+              ["search" => $search_results]
             );
             foreach ($games_list["results"] as $game):
               $is_in_favourites = in_array($game['id'], $game_ids_unique);
