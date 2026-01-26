@@ -74,7 +74,7 @@ $ratings = [
           ?>" />
           <?= htmlspecialchars(isset($game_results["esrb_rating"]["name"])) ? $game_results["esrb_rating"]["name"] : "Unrated" ?>
         </div>
-        <h1 class="text-center"><?= htmlspecialchars($game_results['name']) ?></h1>
+
       </div>
 
       <!-- developer info -->
@@ -90,9 +90,10 @@ $ratings = [
       <!-- image + desc -->
       <section class="img-and-text flex gap-2">
         <img class="w-1/2" src=<?= htmlspecialchars($game_results["background_image"]) ?> alt="">
-        <p class="flex w-1/2">
+        <div class="flex flex-col gap-4 w-1/2">
+          <h1 class="text-center"><?= htmlspecialchars($game_results['name']) ?></h1>
           <?= htmlspecialchars($game_results["description_raw"]) ?>
-        </p>
+        </div>
       </section>
 
       <!-- platforms -->
