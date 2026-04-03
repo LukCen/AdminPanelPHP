@@ -38,8 +38,8 @@ class RawgService
       throw new RuntimeException(curl_error($init));
     }
 
-    curl_close($init);
-
+    // curl_close($init);
+    unset($init);
     $data = json_decode($response, true);
 
     if ($data === null) {
@@ -59,7 +59,6 @@ class RawgService
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_TIMEOUT => 10,
       CURLOPT_HTTPHEADER => ["Accept: application/json"]
-
     ]);
 
     $response = curl_exec($init);
@@ -68,7 +67,8 @@ class RawgService
       throw new RuntimeException(curl_error($init));
     }
 
-    curl_close($init);
+    // curl_close($init);
+    unset($init);
     // var_dump(curl_getinfo($init));
     $data = json_decode($response, true);
 
