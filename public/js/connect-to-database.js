@@ -20,3 +20,21 @@ export async function addToDatabase(value) {
     throw new Error(`Adding to database unsuccessful: ${err}.`)
   }
 }
+
+export async function removeFromDb(value) {
+  console.log('removing...')
+  try {
+    const db = await fetch('../api/RemoveRowFromDatabase.php', {
+      method: 'POST',
+      body: value
+    })
+
+    const data = await db.json()
+
+    if (data.success) {
+      console.log("game removal successful")
+    }
+  } catch (err) {
+    throw new Error(`Removing from database unsuccessful: ${err}.`)
+  }
+}

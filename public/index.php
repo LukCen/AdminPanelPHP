@@ -167,6 +167,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         // favourites page - will be empty by default, populates as you add games to favourites  
         if ($view === "favourites") {
           foreach ($favourites as $game):
+            $game['id'] = $game['rawg_id'];
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
         }
@@ -186,13 +187,19 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
     <span>2025-2026 Made by Łukasz Cena :</span><a class="font-medium underline" href="https://lcena.me"> lcena.me</a>
   </footer>
   <script defer type="module">
-    import { addToDatabase } from '../public/js/connect-to-database.js'
+    import { addToDatabase, removeFromDb } from '../public/js/connect-to-database.js'
 
     document.addEventListener('click', (event) => {
-      const btn = event.target.closest('.dbc')
-      if (!btn) return
-      const btnId = btn.dataset.id
-      addToDatabase([btnId])
+      const btnAdd = event.target.closest('.dbc')
+      const btnRemove = event.target.closest('.dbr')
+      if (!btnAdd && !btnRemove) return
+      else if (btnAdd) {
+        const btnAddId = btnAdd.dataset.id
+        addToDatabase([btnAddId])
+      } else if (btnRemove) {
+        const btnRemoveId = btnRemove.dataset.id
+        removeFromDb([btnRemoveId])
+      }
     })
 
   </script>
