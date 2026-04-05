@@ -1,5 +1,7 @@
 export async function addToDatabase(value) {
+  const loader = document.querySelector(`button[data-id="${value}"]>.lucide-loader-icon`)
   try {
+    loader.classList.remove('hidden')
     const db = await fetch('../api/AddRowToDatabase.php', {
       method: 'POST',
       body: value
@@ -15,6 +17,7 @@ export async function addToDatabase(value) {
           marker.classList.toggle('hidden')
         }, 3000)
       }
+      loader.classList.add('hidden')
     }
   } catch (err) {
     throw new Error(`Adding to database unsuccessful: ${err}.`)

@@ -245,3 +245,18 @@
 *.bg-primary:not(*.text-primary):not(*.text-secondary) { color: var(--color-light) }
 *.bg-secondary:not(*.text-primary):not(*.text-secondary) { color:var(--color-light) }
 *.bg-light:not(*.text-light) { color:var(--color-primary) }
+
+/* animations and transitions */
+
+
+
+@keyframes rotate{
+  
+  to{
+    transform: rotate(360deg);
+  }
+  
+}
+.rotate {
+  animation: rotate 1s linear infinite;
+};
