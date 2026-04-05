@@ -1,5 +1,5 @@
 export async function addToDatabase(value) {
-  const loader = document.querySelector(`button[data-id="${value}"]>.lucide-loader-icon`)
+  const loader = document.querySelector(`.dbc[data-id="${value}"]>.lucide-loader-icon`)
   try {
     loader.classList.remove('hidden')
     const db = await fetch('../api/AddRowToDatabase.php', {
@@ -28,8 +28,10 @@ export async function addToDatabase(value) {
 }
 
 export async function removeFromDb(value) {
+  const loader = document.querySelector(`.dbr[data-id="${value}"]>.lucide-loader-icon`)
   console.log('removing...')
   try {
+    loader.classList.remove('hidden')
     const db = await fetch('../api/RemoveRowFromDatabase.php', {
       method: 'POST',
       body: value
@@ -42,5 +44,8 @@ export async function removeFromDb(value) {
     }
   } catch (err) {
     throw new Error(`Removing from database unsuccessful: ${err}.`)
+  }
+  finally {
+    loader.classList.add('hidden')
   }
 }

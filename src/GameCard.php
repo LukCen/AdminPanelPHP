@@ -30,7 +30,20 @@
   <!-- spinner for oading -->
 
   <!-- remove from favourites -->
-  <button data-id="<?= htmlspecialchars($game["id"]) ?>" class="btn dbr bg-light text-secondary px-2 py-2 w-fit font-bold">Remove from favourites</button>
+  <button data-id="<?= htmlspecialchars($game["id"]) ?>" class="btn dbr flex items-center bg-light text-secondary px-2 py-2 w-fit font-bold">
+    <span>Remove from favourites</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="lucide lucide-loader-icon lucide-loader rotate hidden">
+      <path d="M12 2v4" />
+      <path d="m16.2 7.8 2.9-2.9" />
+      <path d="M18 12h4" />
+      <path d="m16.2 16.2 2.9 2.9" />
+      <path d="M12 18v4" />
+      <path d="m4.9 19.1 2.9-2.9" />
+      <path d="M2 12h4" />
+      <path d="m4.9 4.9 2.9 2.9" />
+    </svg>
+  </button>
   <!-- marker, displayed for 3s after adding, disappears after -->
   <span data-id=<?= $game['id'] ?> class="hidden database-add-marker bg-light px-4 py-1 text-center font-bold">Added to favourites!</span>
 </div>
