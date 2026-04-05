@@ -17,10 +17,13 @@ export async function addToDatabase(value) {
           marker.classList.toggle('hidden')
         }, 3000)
       }
-      loader.classList.add('hidden')
+
     }
   } catch (err) {
     throw new Error(`Adding to database unsuccessful: ${err}.`)
+  }
+  finally {
+    loader.classList.add('hidden')
   }
 }
 
