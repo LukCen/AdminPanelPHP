@@ -1,5 +1,6 @@
 export async function addToDatabase(value) {
   const loader = document.querySelector(`.dbc[data-id="${value}"]>.lucide-loader-icon`)
+  const dbBadge = document.querySelector(`.card[data-id="${value}"] .badge-favourite`)
   try {
     loader.classList.remove('hidden')
     const db = await fetch('../api/AddRowToDatabase.php', {
@@ -9,6 +10,9 @@ export async function addToDatabase(value) {
 
     const data = await db.json()
     if (data.success) {
+      if (dbBadge.classList.contains('hidden')) {
+        dbBadge.classList.replace('hidden', 'flex')
+      }
       console.log('Adding successful')
       const marker = document.querySelector(`.database-add-marker[data-id="${value}"]`)
       if (marker) {
@@ -29,7 +33,8 @@ export async function addToDatabase(value) {
 
 export async function removeFromDb(value) {
   const loader = document.querySelector(`.dbr[data-id="${value}"]>.lucide-loader-icon`)
-  console.log('removing...')
+  // console.log('removing...')
+  const dbBadge = document.querySelector(`.card[data-id="${value}"] .badge-favourite`)
   try {
     loader.classList.remove('hidden')
     const db = await fetch('../api/RemoveRowFromDatabase.php', {
@@ -40,6 +45,9 @@ export async function removeFromDb(value) {
     const data = await db.json()
 
     if (data.success) {
+      if (dbBadge.classList.contains('flex')) {
+        dbBadge.classList.replace('flex', 'hidden')
+      }
       console.log("game removal successful")
     }
   } catch (err) {
