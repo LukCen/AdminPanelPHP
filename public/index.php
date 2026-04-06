@@ -200,7 +200,8 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
     <span>2025-2026 Made by Łukasz Cena :</span><a class="font-medium underline" href="https://lcena.me"> lcena.me</a>
   </footer>
   <script defer type="module">
-    import { addToDatabase, removeFromDb } from '../public/js/connect-to-database.js'
+    // import { addToDatabase, removeFromDb } from '../public/js/connect-to-database.js'
+    import { callDb } from '../public/js/connect-to-database.js'
 
     document.addEventListener('click', (event) => {
       const btnAdd = event.target.closest('.dbc')
@@ -208,10 +209,10 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
       if (!btnAdd && !btnRemove) return
       else if (btnAdd) {
         const btnAddId = btnAdd.dataset.id
-        addToDatabase([btnAddId])
+        callDb("add", [btnAddId])
       } else if (btnRemove) {
         const btnRemoveId = btnRemove.dataset.id
-        removeFromDb([btnRemoveId])
+        callDb("remove", [btnRemoveId])
       }
     })
 

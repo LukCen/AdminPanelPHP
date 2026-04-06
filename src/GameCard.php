@@ -46,4 +46,5 @@
   </button>
   <!-- marker, displayed for 3s after adding, disappears after -->
   <span data-id=<?= $game['id'] ?> class="hidden database-add-marker bg-light px-4 py-1 text-center font-bold">Added to favourites!</span>
+  <span data-id=<?= $game['id'] ?> class="hidden database-remove-marker bg-light px-4 py-1 text-center font-bold">Removed from favourites!</span>
 </div>
