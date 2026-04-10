@@ -38,7 +38,6 @@ class RawgService
       throw new RuntimeException(curl_error($init));
     }
 
-    // curl_close($init);
     unset($init);
     $data = json_decode($response, true);
 
