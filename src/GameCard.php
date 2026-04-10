@@ -13,7 +13,7 @@
     <span class="badge-favourite justify-center items-center font-bold w-fit px-2 py-1 <?= $is_in_favourites ? 'flex' : 'hidden' ?>">Favourite</span>
   </div>
   <!-- add to favourites -->
-  <button data-id="<?= htmlspecialchars($game["id"]) ?>" class="btn dbc flex items-center gap-2 bg-primary px-2 py-2 w-fit font-bold">
+  <button data-id="<?= htmlspecialchars($game["id"]) ?>" class="btn dbc <?= htmlspecialchars($is_in_favourites ? 'hidden' : 'flex') ?> items-center gap-2 bg-primary px-2 py-2 w-fit font-bold">
     <span>Add to favourites</span>
     <!-- spinner for loading -->
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

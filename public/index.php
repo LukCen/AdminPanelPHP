@@ -168,6 +168,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         if ($view === "favourites") {
           foreach ($favourites as $game):
             $game['id'] = $game['rawg_id'];
+            $is_in_favourites = true;
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
         }
