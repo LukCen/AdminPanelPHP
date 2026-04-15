@@ -5,6 +5,9 @@
 
 
 <div data-id="<?= htmlspecialchars($game["id"]) ?>" class="card flex flex-col gap-2 items-center rounded-xl p-2 bg-secondary">
+  <span><?php foreach ($game["genres"] as $genre):
+    echo $genre["name"] . " ";
+  endforeach; ?></span>
   <img src="<?= htmlspecialchars($game['background_image'] ?? 'https://placehold.co/300x300') ?>" alt="">
   <div class="text flex flex-col flex-auto justify-around items-center gap-2">
     <h2><?= htmlspecialchars($game['name']) ?></h2>

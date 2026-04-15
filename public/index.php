@@ -5,13 +5,13 @@ require __DIR__ . '/../vendor/autoload.php';
 if (file_exists(__DIR__ . '/../.env')) {
   Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
 }
+
 use Acme\RawgService;
 
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 
 // parse data from config
-
 $config_raw = file_get_contents("../config/views.json");
 $config = json_decode($config_raw, true);
 
@@ -23,6 +23,10 @@ $games_with_params_return = $games_with_params['results'] ?? [];
 
 $games_current_page = isset($_GET['cpage']) ? (int) $_GET['cpage'] : 1;
 $games_list = $service->fetchData("games", array("page_size" => $games_per_page, "page" => $games_current_page));
+// genres
+$genres_list = $service->fetchData("genres", array("page_size" => $games_per_page, "page" => $games_current_page));
+
+
 
 $games_list_results = $games_list['results'] ?? [];
 $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_page));
@@ -84,6 +88,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
   include '../src/Navbar.php';
   $view = $_GET["view"] ?? "games";
   $search_results = $_GET['search'] ?? null;
+  $filter_results = $_GET['filter'] ?? null;
 
   // CLEAN UP LATER
   // accessing local database - stores favourited games, returns just their rawg_id (equal to 'id' parameter coming directly from the RAWG API)
@@ -123,7 +128,22 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
       </h2>
-
+      <form method="GET">
+        <?php
+        foreach ($_GET as $p => $v):
+          echo "<input type='hidden' name='$p' value='$v'>";
+        endforeach;
+        ?>
+        <select name="filter" id="filter_genres">
+          <option value="all" selected>All Genres</option>
+          <?php
+          foreach ($genres_list["results"] as $genre):
+            echo "<option value='$genre[slug]'>$genre[name]</option>";
+          endforeach;
+          ?>
+        </select>
+        <button class="btn text-primary" type="submit">Filter</button>
+      </form>
       <div class="content flex gap-5 justify-center">
         <?php
 
@@ -139,8 +159,12 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
               $is_in_favourites = in_array($game['id'], $game_ids_unique);
               include __DIR__ . '/../src/GameCard.php';
             endforeach;
+          } else if ($filter_results) {
+            $games_list = $service->fetchData('games', array("page_size" => $games_per_page, "page" => $games_current_page, "genres" => $filter_results));
+            foreach ($games_list["results"] as $game):
+              include __DIR__ . '/../src/GameCard.php';
+            endforeach;
           }
-
           // check in the session storage for this variable - stores the results array from the api
           else if (isset($_SESSION["session_games_list"])) {
             foreach ($_SESSION["session_games_list"] as $game):
@@ -178,8 +202,10 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
       <div class="pagination my-4 
       <?php if ($view !== "games")
         echo 'hidden' ?>">
-          <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
-        <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next &rarr;</a>
+          <!-- <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
+        <a class="btn px-4 py-2 bg-light font-bold" href="?view=games&page_size=15&cpage=<?= $games_current_page + 1 ?>">Next &rarr;</a> -->
+        <a class="btn px-4 py-2 bg-light font-bold" href="?<?= htmlspecialchars($_SERVER['QUERY_STRING']) ?>&cpage=<?= $games_current_page - 1 ?>">&larr; Previous</a>
+        <a class="btn px-4 py-2 bg-light font-bold" href="?<?= htmlspecialchars($_SERVER['QUERY_STRING']) ?>&cpage=<?= $games_current_page + 1 ?>">Next &rarr;</a>
       </div>
       <div class="loading-popup gap-2 items-center hidden">
         <span>Loading next page...</span>
@@ -221,10 +247,3 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
-<style>
-  /* move to main.css later - targets only views displaying cards as to not break the layout */
-  main .content:has(.card) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-</style>

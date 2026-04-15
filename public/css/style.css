@@ -49,7 +49,10 @@ main .content {
 main, .container-main {
   flex-wrap: wrap;
 }
-
+main .content:has(.card) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
 /* custom classes */
 
 .card {
