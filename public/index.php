@@ -1,7 +1,10 @@
 <?php
-session_start();
+define('BASE_PATH', rtrim(dirname($_SERVER['SCRIPT_NAME'], 2), '/'));
 
+session_start();
 require __DIR__ . '/../vendor/autoload.php';
+
+
 if (file_exists(__DIR__ . '/../.env')) {
   Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
 }
@@ -27,7 +30,6 @@ $games_list = $service->fetchData("games", array("page_size" => $games_per_page,
 $genres_list = $service->fetchData("genres", array("page_size" => $games_per_page, "page" => $games_current_page));
 
 
-
 $games_list_results = $games_list['results'] ?? [];
 $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_page));
 $_SESSION["session_games_list"] = $games_list_results;
@@ -42,7 +44,6 @@ $db = new PDO(
 
 $statement = $db->query("SELECT * FROM games");
 $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
-
 
 ?>
 
@@ -195,6 +196,11 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
             $is_in_favourites = true;
             include __DIR__ . '/../src/GameCard.php';
           endforeach;
+        }
+
+        // login/registration form, accessed via a button in the menu on the left
+        if ($view === "login") {
+          include __DIR__ . '/../src/LoginForm.php';
         }
         ?>
       </div>

@@ -30,5 +30,8 @@ $active_view = $_GET['view'] ?? 'games' . "&page_size=$size"
         </a>
       </li>
     <?php endforeach; ?>
+    <li class="bg-accent px-4 py-2 rounded">
+      <a class="block font-bold" href="?view=login">Login/Register</a>
+    </li>
   </ul>
 </nav>
