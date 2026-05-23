@@ -34,4 +34,8 @@ $active_view = $_GET['view'] ?? 'games' . "&page_size=$size"
       <a class="block font-bold" href="?view=login">Login/Register</a>
     </li>
   </ul>
+
+  <div class="user-status flex justify-between">
+    <span><?= $_SESSION['username'] ?? "Log in" ?></span>
+  </div>
 </nav>

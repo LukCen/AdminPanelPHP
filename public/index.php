@@ -14,6 +14,7 @@ use Acme\RawgService;
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 
+
 // parse data from config
 $config_raw = file_get_contents("../config/views.json");
 $config = json_decode($config_raw, true);

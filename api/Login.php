@@ -1,4 +1,6 @@
 <?php
-echo "Login"
+echo "Login";
+require_once __DIR__ . "/ReadUserFromDatabase.php"
+
   ?>
 
