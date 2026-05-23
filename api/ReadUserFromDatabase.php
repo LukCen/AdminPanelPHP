@@ -1,4 +1,5 @@
 <?php
+session_start();
 function readUser(array $data)
 {
   $db = 'sqlite:' . __DIR__ . '/../database/admin_panel.db';
@@ -22,10 +23,11 @@ function readUser(array $data)
     json_encode(['success' => true]);
 
   if ($passwordMatches) {
-
-    echo json_encode($results);
+    $_SESSION["username"] = $results["username"];
+    header('Location: /admin_panel/public');
+    exit();
   } else {
-    echo "WRONG PASSWORD";
+    echo "WRONG PASSWORD OR USERNAME";
   }
 }
 

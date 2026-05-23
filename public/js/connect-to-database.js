@@ -11,6 +11,7 @@ export async function callDb(action, value) {
   const dbBadge = document.querySelector(`.card[data-id="${value}"] .badge-favourite`);
 
   try {
+    console.log(action, value)
     // values and endpoints depending on action param - expand if needed
     switch (action) {
       case "add":

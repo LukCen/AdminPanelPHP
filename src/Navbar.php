@@ -1,5 +1,5 @@
 <?php
-
+// session_start();
 $views = [
   'games' => ['label' => 'Games', 'page_size' => 20],
   'developers' => ['label' => 'Developers', 'page_size' => 10],
@@ -36,6 +36,12 @@ $active_view = $_GET['view'] ?? 'games' . "&page_size=$size"
   </ul>
 
   <div class="user-status flex justify-between">
-    <span><?= $_SESSION['username'] ?? "Log in" ?></span>
+    <span><?= $_SESSION["username"] ?? "Log in" ?></span>
   </div>
+
+  <!-- <ul class="sessionvars">
+    <?php
+
+    ?>
+  </ul> -->
 </nav>

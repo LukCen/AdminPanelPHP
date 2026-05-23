@@ -11,7 +11,7 @@ use Acme\RawgService;
 header('Content-Type: application/json');
 
 
-$data = json_decode(file_get_contents('php://input', true));
+$data = json_decode(file_get_contents('php://input'), true);
 if (!isset($data)) {
   http_response_code(400);
   echo json_encode(['error' => 'Missing game ID']);
