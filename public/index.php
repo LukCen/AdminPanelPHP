@@ -159,19 +159,19 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
             );
             foreach ($games_list["results"] as $game):
               $is_in_favourites = in_array($game['id'], $game_ids_unique);
-              include __DIR__ . '/../src/GameCard.php';
+              include __DIR__ . '/../src/Components/GameCard.php';
             endforeach;
           } else if ($filter_results) {
             $games_list = $service->fetchData('games', array("page_size" => $games_per_page, "page" => $games_current_page, "genres" => $filter_results));
             foreach ($games_list["results"] as $game):
-              include __DIR__ . '/../src/GameCard.php';
+              include __DIR__ . '/../src/Components/GameCard.php';
             endforeach;
           }
           // check in the session storage for this variable - stores the results array from the api
           else if (isset($_SESSION["session_games_list"])) {
             foreach ($_SESSION["session_games_list"] as $game):
               $is_in_favourites = in_array($game['id'], $game_ids_unique);
-              include __DIR__ . '/../src/GameCard.php';
+              include __DIR__ . '/../src/Components/GameCard.php';
             endforeach;
           }
         }
@@ -188,14 +188,14 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         //game details page
         if ($view === "game_page") {
-          include __DIR__ . '/../src/GamePage.php';
+          include __DIR__ . '/../src/Views/GamePage.php';
         }
         // favourites page - will be empty by default, populates as you add games to favourites  
         if ($view === "favourites") {
           foreach ($favourites as $game):
             $game['id'] = $game['rawg_id'];
             $is_in_favourites = true;
-            include __DIR__ . '/../src/GameCard.php';
+            include __DIR__ . '/../src/Views/GameCard.php';
           endforeach;
         }
 
