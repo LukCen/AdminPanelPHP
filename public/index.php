@@ -87,7 +87,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <!-- navbar component -->
   <?php
-  include '../src/Navbar.php';
+  include '../src/Components/Navbar.php';
   $view = $_GET["view"] ?? "games";
   $search_results = $_GET['search'] ?? null;
   $filter_results = $_GET['filter'] ?? null;
