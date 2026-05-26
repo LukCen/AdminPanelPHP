@@ -195,13 +195,13 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
           foreach ($favourites as $game):
             $game['id'] = $game['rawg_id'];
             $is_in_favourites = true;
-            include __DIR__ . '/../src/Views/GameCard.php';
+            include __DIR__ . '/../src/Components/GameCard.php';
           endforeach;
         }
 
         // login/registration form, accessed via a button in the menu on the left
         if ($view === "login") {
-          include __DIR__ . '/../src/LoginForm.php';
+          include __DIR__ . '/../src/Views/LoginForm.php';
         }
         ?>
       </div>
