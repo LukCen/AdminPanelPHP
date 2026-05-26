@@ -9,5 +9,5 @@
     <p>Games count: <?= htmlspecialchars($dev["games_count"]) ?></p>
   </div>
 
-  <a class="btn" href="?view=games&page_size=20&search=<?= htmlspecialchars($dev['name']) ?>">See games made by <?= ucfirst(htmlspecialchars($dev['name'])) ?></a>
+  <a class="btn bg-primary font-bold px-4 py-2" href="?view=games&page_size=20&search=<?= htmlspecialchars($dev['name']) ?>">See games made by <?= ucfirst(htmlspecialchars($dev['name'])) ?></a>
 </div>

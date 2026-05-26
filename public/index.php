@@ -182,7 +182,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
           }
           $devs_list_results = $devs_list['results'];
           foreach ($devs_list_results as $dev):
-            include __DIR__ . '/../src/DeveloperCard.php';
+            include __DIR__ . '/../src/Components/DeveloperCard.php';
           endforeach;
         }
 
