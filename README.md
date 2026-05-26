@@ -1,5 +1,5 @@
 
-Hey! This is my very first real PHP project - an admin/control panel, wired to the RAWG API, allowing you to explore and browse games available through that API.
+Hey! This is my very first real PHP project - a game library, wired to the RAWG API, allowing you to explore and browse games available through that API.
 
 Current features :
 

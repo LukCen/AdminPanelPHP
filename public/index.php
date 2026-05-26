@@ -9,7 +9,7 @@ if (file_exists(__DIR__ . '/../.env')) {
   Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
 }
 
-use Acme\RawgService;
+use App\Services\RawgService;
 
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));

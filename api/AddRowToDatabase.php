@@ -6,7 +6,7 @@ if (file_exists(__DIR__ . '/../.env')) {
   Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
 }
 
-use Acme\RawgService;
+use App\Services\RawgService;
 
 header('Content-Type: application/json');
 

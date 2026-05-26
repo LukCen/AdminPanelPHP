@@ -1,6 +1,6 @@
 <?php
 
-use Acme\RawgService;
+use App\Services\RawgService;
 require __DIR__ . '/../vendor/autoload.php';
 
 // loads envariables - currently only an API key

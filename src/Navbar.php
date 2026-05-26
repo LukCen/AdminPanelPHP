@@ -30,18 +30,20 @@ $active_view = $_GET['view'] ?? 'games' . "&page_size=$size"
         </a>
       </li>
     <?php endforeach; ?>
-    <li class="bg-accent px-4 py-2 rounded">
+    <li class="bg-accent px-4 py-2 rounded flex justify-between">
       <a class="block font-bold" href="?view=login">Login/Register</a>
     </li>
+    <div class="flex justify-around bg-primary py-2 items-center">
+      <span>Hello, <?= $_SESSION["username"] ?? "Log in" ?>!</span>
+      <button class="<?= $_SESSION["username"] ? 'block' : 'hidden' ?> logout bg-secondary px-2 py-1">Logout</button>
+    </div>
   </ul>
 
   <div class="user-status flex justify-between">
-    <span><?= $_SESSION["username"] ?? "Log in" ?></span>
   </div>
-
-  <!-- <ul class="sessionvars">
-    <?php
-
-    ?>
-  </ul> -->
 </nav>
+
+<script type="module">
+  const btnLogout = document.querySelector('.logout');
+  btnLogout.
+</script>

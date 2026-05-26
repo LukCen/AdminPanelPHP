@@ -1,7 +1,7 @@
 <?php
 /** @var array $game_page */
 
-use Acme\RawgService;
+use App\Services\RawgService;
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 $game_view = $service->fetchDataGamePage("games", $_GET['game']);
