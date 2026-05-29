@@ -7,7 +7,7 @@ $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 $game_view = $service->fetchDataGamePage("games", $_GET['game']);
 
 $game_results = $game_view;
-
+print_r($game_results);
 $ratings = [
   "everyone" => [
     "text" => "everyone",

@@ -1,4 +1,11 @@
 <?php
+// temporary hack - the data imports from db error out without URL parameters, so this defaults you to the 'games' view.
+// only really needed if you try to return to the page from, like, browser history
+// i think
+if ($_GET == null) {
+  header('Location: ' . '?view=games&page_size=20');
+  exit();
+}
 define('BASE_PATH', rtrim(dirname($_SERVER['SCRIPT_NAME'], 2), '/'));
 
 session_start();
