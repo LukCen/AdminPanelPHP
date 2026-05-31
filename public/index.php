@@ -1,4 +1,6 @@
 <?php
+
+use App\Services\DatabaseService;
 // temporary hack - the data imports from db error out without URL parameters, so this defaults you to the 'games' view.
 // only really needed if you try to return to the page from, like, browser history
 // i think
@@ -21,6 +23,11 @@ use App\Services\RawgService;
 
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
 
+// TESTING
+// $newdb = new DatabaseService('sqlite:' . __DIR__ . '/../database/admin_panel.db');
+
+// echo ("STATEMENT:" . $newdb->select('users', '*'));
+// TESTING
 
 // parse data from config
 $config_raw = file_get_contents("../config/views.json");
