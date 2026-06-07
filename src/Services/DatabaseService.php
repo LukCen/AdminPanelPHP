@@ -7,16 +7,14 @@ class DatabaseService
 {
   private $db;
   private $pdo;
-  private $table;
-  private $statement;
 
-  public function __construct(string $db)
+  public function __construct($db)
   {
     $this->db = $db;
     $this->pdo = $this->connect($db);
   }
 
-  public function connect($db)
+  private function connect($db)
   {
     $pdo = new PDO(
       $db,
@@ -35,5 +33,18 @@ class DatabaseService
     $result = $stmt->fetch();
 
     return json_encode($result);
+  }
+
+  public function insert($table, array $data)
+  {
+    $keys = array_keys($data);
+    $values = array_values($data);
+
+    $listedKeys = implode(",", $keys);
+    $toExecute = array_map(fn($listedKeys) => ":" . $listedKeys, $keys);
+
+    $placeholderValues = implode(",", $toExecute);
+    $stmt = $this->pdo->prepare("INSERT INTO $table ($listedKeys) VALUES($placeholderValues)");
+    $stmt->execute(array_combine($toExecute, $values));
   }
 }

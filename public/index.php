@@ -14,20 +14,14 @@ session_start();
 require __DIR__ . '/../vendor/autoload.php';
 
 
+// load up env file
 if (file_exists(__DIR__ . '/../.env')) {
   Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
 }
 
 use App\Services\RawgService;
 
-
 $service = new RawgService($_ENV['RAWG_API_KEY'] ?? getenv('RAWG_API_KEY'));
-
-// TESTING
-// $newdb = new DatabaseService('sqlite:' . __DIR__ . '/../database/admin_panel.db');
-
-// echo ("STATEMENT:" . $newdb->select('users', '*'));
-// TESTING
 
 // parse data from config
 $config_raw = file_get_contents("../config/views.json");
@@ -47,18 +41,18 @@ $genres_list = $service->fetchData("genres", array("page_size" => $games_per_pag
 
 $games_list_results = $games_list['results'] ?? [];
 $devs_list = $service->fetchData("developers", array("page_size" => $devs_per_page));
-$_SESSION["session_games_list"] = $games_list_results;
+// $_SESSION["session_games_list"] = $games_list_results;
 $games_page_offset = ($games_current_page - 1) * $games_per_page;
-$games_to_render = array_slice($_SESSION["session_games_list"], $games_page_offset, $games_per_page);
+// $games_to_render = array_slice($_SESSION["session_games_list"], $games_page_offset, $games_per_page);
 
 // view - favourites
-$db = new PDO(
-  'sqlite:' . __DIR__ . '/../database/admin_panel.db',
-  options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-);
+// $db = new PDO(
+//   'sqlite:' . __DIR__ . '/../database/admin_panel.db',
+//   options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+// );
 
-$statement = $db->query("SELECT * FROM games");
-$favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
+// $statement = $db->query("SELECT * FROM games");
+// $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -108,21 +102,21 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
 
   // CLEAN UP LATER
   // accessing local database - stores favourited games, returns just their rawg_id (equal to 'id' parameter coming directly from the RAWG API)
-  function dbAccess()
-  {
-    $db = 'sqlite:' . __DIR__ . '/../database/admin_panel.db';
-
-    $results = [];
-    $db_connect = new PDO($db);
-
-    foreach ($db_connect->query("SELECT * FROM games") as $row) {
-      $results[] = $row['rawg_id'];
-    }
-
-    return $results;
-  }
-
-  $favourites_id = dbAccess();
+  // function dbAccess()
+  // {
+  //   $db = 'sqlite:' . __DIR__ . '/../database/admin_panel.db';
+  
+  //   $results = [];
+  //   $db_connect = new PDO($db);
+  
+  //   foreach ($db_connect->query("SELECT * FROM games") as $row) {
+  //     $results[] = $row['rawg_id'];
+  //   }
+  
+  //   return $results;
+  // }
+  
+  // $favourites_id = dbAccess();
   // CLEAN UP LATER
   
   ?>
@@ -163,7 +157,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
       <div class="content flex gap-5 justify-center">
         <?php
 
-        $game_ids_unique = array_unique($favourites_id);
+        // $game_ids_unique = array_unique($favourites_id);
         if ($view === "games") {
           // handles user search queries
           if ($search_results) {
@@ -172,7 +166,7 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
               ["search" => $search_results]
             );
             foreach ($games_list["results"] as $game):
-              $is_in_favourites = in_array($game['id'], $game_ids_unique);
+              // $is_in_favourites = in_array($game['id'], $game_ids_unique);
               include __DIR__ . '/../src/Components/GameCard.php';
             endforeach;
           } else if ($filter_results) {
@@ -182,9 +176,9 @@ $favourites = $statement->fetchAll(PDO::FETCH_ASSOC);
             endforeach;
           }
           // check in the session storage for this variable - stores the results array from the api
-          else if (isset($_SESSION["session_games_list"])) {
-            foreach ($_SESSION["session_games_list"] as $game):
-              $is_in_favourites = in_array($game['id'], $game_ids_unique);
+          else {
+            foreach ($games_list_results as $game):
+              // $is_in_favourites = in_array($game['id'], $game_ids_unique);
               include __DIR__ . '/../src/Components/GameCard.php';
             endforeach;
           }
